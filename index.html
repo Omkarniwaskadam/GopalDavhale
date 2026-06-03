@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Gopal Davhale, Cinematographer & Reel Creator.">
+    <title>GOPAL DAVHALE — Cinematographer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        dm: ['DM Sans', 'sans-serif'],
+                        script: ['Great Vibes', 'cursive'],
+                    },
+                    colors: {
+                        gold: '#C8A96E',
+                        'gold-light': '#E0C88A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; } /* Fixed Header Overlap */
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .anim { opacity: 0; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .d1 { animation-delay: 0.1s; }
+        .d2 { animation-delay: 0.25s; }
+        .d3 { animation-delay: 0.45s; }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.4); }
+            50% { box-shadow: 0 0 20px 4px rgba(200, 169, 110, 0.15); }
+        }
+        .pulse-gold { animation: pulseGlow 3s ease-in-out infinite; }
+
+        .hero-stack { position: relative; width: 100%; max-width: 700px; margin: 0 auto; }
+        .hero-text-layer {
+            position: absolute; inset: 0; z-index: 1;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-start; padding-top: 10vh; pointer-events: none;
+        }
+        .hero-image-layer {
+            position: relative; z-index: 5;
+            display: flex; align-items: flex-end; justify-content: center; padding-top: 6vh;
+        }
+        .hero-person {
+            max-width: 420px; width: 65vw;
+            filter: brightness(1.12) contrast(1.06) saturate(1.05);
+            mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+        }
+        @media (min-width: 640px) {
+            .hero-person { max-width: 480px; width: 42vw; }
+            .hero-text-layer { padding-top: 6vh; }
+        }
+        @media (min-width: 1024px) {
+            .hero-person { max-width: 520px; width: 32vw; }
+            .hero-text-layer { padding-top: 4vh; }
+        }
+
+        .about-person { filter: brightness(1.08) contrast(1.04) saturate(1.05); }
+
+        .nav-link { position: relative; padding: 8px 0; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 1px; background: #C8A96E; transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: #fff; }
+        /* Dropdown Options Styling */
+        .input-field option {
+            background-color: #0a0a0a; /* Deep dark background */
+            color: #C8A96E;            /* White text */
+            padding: 12px;
+        }
+        .input-field {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px; padding: 14px 18px; color:#C8A96E; font-size: 14px;
+            font-family: 'Inter', sans-serif; transition: border-color 0.3s, background 0.3s;
+            outline: none; width: 100%;
+        }
+        .input-field::placeholder { color: rgba(255,255,255,0.25); }
+        .input-field:focus { border-color: rgba(200,169,110,0.4); background: rgba(255,255,255,0.06); }
+
+        .scroll-reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .portfolio-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .portfolio-card:hover { border-color: rgba(200,169,110,0.2); }
+
+        .contact-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .contact-item:last-child { border-bottom: none; }
+
+        .why-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .why-item:last-child { border-bottom: none; }
+        .why-dot {
+            width: 8px; height: 8px; min-width: 8px;
+            border-radius: 50%; background: #C8A96E; margin-top: 6px;
+        }
+
+        .masonry-item { break-inside: avoid; margin-bottom: 16px; }
+        .gallery-item {
+            overflow: hidden; border-radius: 8px; cursor: pointer; position: relative;
+        }
+        .gallery-item img {
+            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); width: 100%; display: block;
+        }
+        .gallery-item:hover img { transform: scale(1.06); }
+        .gallery-item .overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+            opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 20px;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+
+        /* Smooth Mobile Menu Transition */
+        #mobileMenu { transition: opacity 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(-10px); pointer-events: none; }
+        #mobileMenu.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/[0.04]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-14">
+            <nav class="hidden md:flex items-center gap-9">
+                <a href="#portfolio" class="nav-link text-[12px] font-semibold text-white/50 hover:text-white transition-colors tracking-widest uppercase">Portfolio</a>
+                <a href="#reels" class="nav-link text-[12px] font-semibold text-white/50 hover:text-white transition-colors tracking-widest uppercase">Reels</a>
+                <a href="#about" class="nav-link text-[12px] font-semibold text-white/50 hover:text-white transition-colors tracking-widest uppercase">About</a>
+                <a href="#contact" class="nav-link text-[12px] font-semibold text-white/50 hover:text-white transition-colors tracking-widest uppercase">Contact</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 text-gold text-[11px] font-bold uppercase tracking-wider hover:bg-gold/10 transition-all pulse-gold">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    Follow
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors">
+                    <i data-lucide="menu" class="w-4 h-4 text-white/60"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="absolute top-14 left-0 w-full border-t border-white/[0.04] bg-black/95 backdrop-blur-xl md:hidden">
+            <div class="px-6 py-4 flex flex-col gap-3">
+                <a href="#portfolio" class="text-sm text-white/60 hover:text-white py-2" onclick="closeMobile()">Portfolio</a>
+                <a href="#reels" class="text-sm text-white/60 hover:text-white py-2" onclick="closeMobile()">Reels</a>
+                <a href="#about" class="text-sm text-white/60 hover:text-white py-2" onclick="closeMobile()">About</a>
+                <a href="#contact" class="text-sm text-white/60 hover:text-white py-2" onclick="closeMobile()">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden">
+        <div class="anim d1 relative z-10 text-center px-6 pt-24 mb-0">
+            <p class="font-script text-gold text-2xl sm:text-3xl md:text-4xl lg:text-[52px] leading-tight">
+                cinematographer & reel creator
+            </p>
+        </div>
+        <div class="hero-stack anim d2">
+            <div class="hero-text-layer">
+                <h1 class="text-[18vw] sm:text-[15vw] md:text-[13vw] lg:text-[11vw] font-black uppercase tracking-[-0.04em] leading-[0.78] text-white text-center select-none">
+                    Gopal<br>Davhale
+                </h1>
+            </div>
+            <div class="hero-image-layer">
+                <img src="WhatsApp Image 2026-05-17 at 11.19.07 AM.png" alt="Gopal Davhale" class="hero-person">
+            </div>
+        </div>
+        <div class="anim d3 relative z-10 text-center px-6 mt-4 sm:mt-2 flex-shrink-0">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="#contact" class="px-9 py-3.5 bg-gold text-black rounded-full text-[13px] font-bold uppercase tracking-wider hover:bg-gold-light transition-all duration-300 hover:scale-105 pulse-gold">
+                    Hire Gopal
+                </a>
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="group px-7 py-3.5 border border-white/12 rounded-full text-[13px] font-medium text-white/60 hover:text-white hover:border-white/25 transition-all flex items-center gap-2">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PORTFOLIO ========== -->
+    <section id="portfolio" class="bg-black py-24 sm:py-32 px-6 lg:px-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="scroll-reveal text-center mb-14">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
+                    WELCOME TO MY<br><span class="font-script text-gold text-5xl sm:text-6xl md:text-7xl font-normal">PORTFOLIO</span>
+                </h2>
+            </div>
+            <div class="scroll-reveal text-center max-w-3xl mx-auto mb-16">
+                <p class="text-white/55 font-light leading-relaxed text-[15px] sm:text-base">
+                    I'm <strong class="text-white font-semibold">Gopal Dhavale</strong>, a cinematographer & reel creator with
+                    <strong class="text-gold font-semibold">5+ years</strong> of experience in visual storytelling. I specialize in
+                    <span class="text-white/80">Wedding Cinema, Music Videos, Pre-Wedding Shoots</span>, and
+                    <span class="text-white/80">Instagram Reels</span>. My focus is always on
+                    <span class="text-white/80">cinematic compositions, smooth camera movements</span>,
+                    <span class="text-white/80">dramatic lighting</span>, and
+                    <span class="text-white/80">cinematic color grading</span> — to make every frame feel like a movie.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- CONTACTS -->
+                <div class="scroll-reveal portfolio-card p-8">
+                    <h3 class="text-lg font-bold uppercase tracking-wider text-white mb-6 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center">
+                            <i data-lucide="address-book" class="w-4 h-4 text-gold"></i>
+                        </div>
+                        Contacts
+                    </h3>
+                    <div class="contact-item">
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="phone" class="w-[16px] h-[16px] text-gold/70"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-white/25 font-medium mb-1">Phone</div>
+                            <a href="tel:+919876543210" class="text-sm text-white/70 hover:text-gold transition-colors font-medium">+91 98765 43210</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="mail" class="w-[16px] h-[16px] text-gold/70"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-white/25 font-medium mb-1">Email</div>
+                            <a href="mailto:gopaldhavale@gmail.com" class="text-sm text-white/70 hover:text-gold transition-colors font-medium">gopaldhavale@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="instagram" class="w-[16px] h-[16px] text-gold/70"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-white/25 font-medium mb-1">Instagram</div>
+                            <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="text-sm text-white/70 hover:text-gold transition-colors font-medium">@cinex_gopiiii01</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="map-pin" class="w-[16px] h-[16px] text-gold/70"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-white/25 font-medium mb-1">Location</div>
+                            <span class="text-sm text-white/70 font-medium">Maharashtra, India — Available Pan-India</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- WHY CHOOSE ME -->
+                <div class="scroll-reveal portfolio-card p-8">
+                    <h3 class="text-lg font-bold uppercase tracking-wider text-white mb-6 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-gold"></i>
+                        </div>
+                        Why Choose Me?
+                    </h3>
+                    <div class="why-item">
+                        <div class="why-dot"></div>
+                        <div>
+                            <div class="text-sm text-white/80 font-medium">Cinematic Visual Language</div>
+                            <div class="text-[13px] text-white/35 mt-0.5 font-light">Every frame composed like a film still</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-dot"></div>
+                        <div>
+                            <div class="text-sm text-white/80 font-medium">Unlimited Revisions</div>
+                            <div class="text-[13px] text-white/35 mt-0.5 font-light">Until you're 100% satisfied with the output</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-dot"></div>
+                        <div>
+                            <div class="text-sm text-white/80 font-medium">Client Satisfaction Priority</div>
+                            <div class="text-[13px] text-white/35 mt-0.5 font-light">Your vision always comes first</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-dot"></div>
+                        <div>
+                            <div class="text-sm text-white/80 font-medium">Professional Color Grading</div>
+                            <div class="text-[13px] text-white/35 mt-0.5 font-light">Cinematic looks that elevate every project</div>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-dot"></div>
+                        <div>
+                            <div class="text-sm text-white/80 font-medium">Fast Delivery</div>
+                            <div class="text-[13px] text-white/35 mt-0.5 font-light">Quick turnaround without compromising quality</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ========== REELS ========== -->
+    <section id="reels" class="bg-[#050505] py-24 sm:py-32 px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="scroll-reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/50 font-medium mb-3 block">Instagram</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Reels</h2>
+                </div>
+                <a href="https://www.instagram.com/cinex_gopiiii01/reels/" target="_blank" class="group text-sm text-white/30 hover:text-gold transition-colors flex items-center gap-2 font-medium">
+                    All Reels <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="scroll-reveal gallery-item aspect-[9/16]">
+                    <video src="IMG_8251.MOV" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                    <div class="overlay"><div class="flex items-center gap-2"><svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="text-xs text-white/80">2.1M views</span></div></div>
+                </a>
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="scroll-reveal gallery-item aspect-[9/16]">
+                    <video src="IMG_0127.MOV" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                    <div class="overlay"><div class="flex items-center gap-2"><svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="text-xs text-white/80">890K views</span></div></div>
+                </a>
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="scroll-reveal gallery-item aspect-[9/16]">
+                    <video src="IMG_0136.MOV" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                    <div class="overlay"><div class="flex items-center gap-2"><svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="text-xs text-white/80">1.5M views</span></div></div>
+                </a>
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="scroll-reveal gallery-item aspect-[9/16]">
+                    <video src="IMG_1315.MOV" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                    <div class="overlay"><div class="flex items-center gap-2"><svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="text-xs text-white/80">650K views</span></div></div>
+                </a>
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="scroll-reveal gallery-item aspect-[9/16] hidden sm:block">
+                    <video src="IMG_1197.MOV" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
+                    <div class="overlay"><div class="flex items-center gap-2"><svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="text-xs text-white/80">1.2M views</span></div></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="bg-black py-24 sm:py-32 px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="scroll-reveal relative">
+                    <div class="rounded-2xl overflow-hidden bg-[#0a0a0a] p-6">
+                        <img src="573522656_18077507258325582_1645849658639008530_n.jpg" loading="lazy" alt="Gopal Dhavale" class="about-person w-full">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 border-2 border-gold/20 rounded-2xl -z-10"></div>
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-2 border-gold/10 rounded-2xl -z-10"></div>
+                </div>
+                <div class="scroll-reveal">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/50 font-medium mb-6 block">About</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-8">
+                        The Story Behind<br>the <span class="font-script text-gold text-4xl sm:text-5xl">Lens</span>
+                    </h2>
+                    <div class="space-y-5 text-white/45 font-light leading-relaxed text-[15px]">
+                        <p>I am passionate cinematographer and reel creator known for crafting visually compelling stories. With a sharp eye for composition, lighting, and color, he transforms ordinary moments into cinematic experiences.</p>
+                        <p>His work spans across wedding cinema, music videos, pre-wedding films, short films, and trending Instagram reels. Each project is approached with a distinct visual language that resonates with audiences and clients alike.</p>
+                        <p>Gopal believes that great cinematography is about feeling the moment before capturing it — and that philosophy reflects in every frame he shoots.</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-white/[0.06]">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">200+</div>
+                            <div class="text-[11px] text-white/30 uppercase tracking-wider mt-1">Projects</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">2K+</div>
+                            <div class="text-[11px] text-white/30 uppercase tracking-wider mt-1">Followers</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-bold text-white">5M+</div>
+                            <div class="text-[11px] text-white/30 uppercase tracking-wider mt-1">Total Views</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="bg-[#050505] py-24 sm:py-32 px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                <div class="scroll-reveal">
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/50 font-medium mb-6 block">Get in Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+                        Let's Create<br>Something <span class="font-script text-gold text-4xl sm:text-5xl">Beautiful</span>
+                    </h2>
+                    <p class="text-white/40 font-light leading-relaxed text-[15px] mb-10 max-w-md">Whether it's a wedding, music video, brand film, or a creative reel — I'd love to hear about your project.</p>
+                    <div class="space-y-5">
+                        <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-gold/30 transition-colors">
+                                <i data-lucide="instagram" class="w-[18px] h-[18px] text-white/40 group-hover:text-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/70 group-hover:text-white transition-colors">@cinex_gopiiii01</div>
+                                <div class="text-[12px] text-white/30">Instagram — DM for quick replies</div>
+                            </div>
+                        </a>
+                        <a href="mailto:gopaldhavale@gmail.com" class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-gold/30 transition-colors">
+                                <i data-lucide="mail" class="w-[18px] h-[18px] text-white/40 group-hover:text-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/70 group-hover:text-white transition-colors">gopaldhavale@gmail.com</div>
+                                <div class="text-[12px] text-white/30">For formal inquiries</div>
+                            </div>
+                        </a>
+                        <a href="tel:+919876543210" class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-gold/30 transition-colors">
+                                <i data-lucide="phone" class="w-[18px] h-[18px] text-white/40 group-hover:text-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-white/70 group-hover:text-white transition-colors">+91 73500 35536</div>
+                                <div class="text-[12px] text-white/30">WhatsApp / Call</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="scroll-reveal">
+                    <!-- Added Action Endpoint for real submissions (e.g. Formspree) -->
+                    <form id="bookingForm" action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST" class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 sm:p-10 space-y-5">
+                        <div class="text-center mb-2">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-gold/50 font-medium">Booking Form</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2 block">Name *</label>
+                                <input type="text" name="name" class="input-field" placeholder="Your full name" required>
+                            </div>
+                            <div>
+                                <label class="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2 block">Phone *</label>
+                                <input type="tel" name="phone" class="input-field" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2 block">Email</label>
+                            <input type="email" name="email" class="input-field" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2 block">Project Type *</label>
+                            <select name="projectType" class="input-field appearance-none cursor-pointer" required style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right 16px center;">
+                                <option value="" disabled selected>Select project type</option>
+                                <option value="wedding">Wedding Cinema</option>
+                                <option value="prewedding">Pre-Wedding Shoot</option>
+                                <option value="music-video">Music Video</option>
+                                <option value="short-film">Short Film</option>
+                                <option value="reel">Instagram Reel / Content</option>
+                                <option value="brand">Brand / Commercial</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2 block">Tell me about your project</label>
+                            <textarea name="message" class="input-field resize-none" rows="4" placeholder="Share your vision, references, budget..."></textarea>
+                        </div>
+                        
+                        <button type="submit" id="submitBtn" class="w-full py-4 bg-gold text-black rounded-xl text-sm font-bold uppercase tracking-wider hover:bg-gold-light transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                            Send Booking Request
+                        </button>
+                        
+                        <div id="formSuccess" class="hidden text-center py-4">
+                            <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
+                                <i data-lucide="check" class="w-6 h-6 text-emerald-400"></i>
+                            </div>
+                            <p class="text-emerald-400 text-sm font-medium">Request sent successfully!</p>
+                            <p class="text-white/30 text-xs mt-1">Gopal will respond within 24 hours</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-black border-t border-white/[0.04] py-10 px-6 lg:px-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <span class="text-[12px] text-white/20">© 2026 Gopal Dhavale. All rights reserved.</span>
+            <div class="flex items-center gap-6">
+                <a href="https://www.instagram.com/cinex_gopiiii01/" target="_blank" class="text-white/25 hover:text-gold transition-colors">
+                    <i data-lucide="instagram" class="w-[18px] h-[18px]"></i>
+                </a>
+                <a href="#" class="text-white/25 hover:text-gold transition-colors"><i data-lucide="youtube" class="w-[18px] h-[18px]"></i></a>
+                <a href="#" class="text-white/25 hover:text-gold transition-colors"><i data-lucide="twitter" class="w-[18px] h-[18px]"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        function closeMobile() { 
+            mobileMenu.classList.remove('active'); 
+        }
+
+        // Scroll Reveal Animation
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), i * 60);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
+
+        // Active Navigation Highlight
+        const secs = document.querySelectorAll('section[id]');
+        const navs = document.querySelectorAll('header nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            secs.forEach(s => { 
+                const sectionTop = s.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = s.id;
+                }
+            });
+            
+            navs.forEach(l => {
+                l.classList.remove('active', 'text-white');
+                l.classList.add('text-white/50');
+                if (l.getAttribute('href') === `#${current}`) { 
+                    l.classList.add('active'); 
+                }
+            });
+        });
+
+        // Form Submission Logic
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            
+            // Simulate processing state
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin inline-block mr-2"></i> Sending...';
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                // Hide inputs and show success message
+                e.target.querySelectorAll('input, select, textarea, button, label, .text-\\[11px\\]').forEach(el => el.style.display = 'none');
+                document.getElementById('formSuccess').classList.remove('hidden');
+                lucide.createIcons();
+            }, 1200); // 1.2 second fake delay
+        });
+    </script>
+</body>
+</html>
